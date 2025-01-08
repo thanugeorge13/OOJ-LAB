@@ -1,0 +1,86 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class IntDiv extends JFrame {
+    private JTextField txtNum1, txtNum2, txtResult;
+    private JButton btnDivide;
+
+    public IntDiv() {
+        setTitle("Integer Division Calculator");
+        setSize(400, 250);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(4, 2, 10, 10));
+
+        initializeComponents();
+
+        addComponentsToFrame();
+
+        setLocationRelativeTo(null);
+    }
+
+    private void initializeComponents() {
+
+        JLabel lblNum1 = new JLabel("Number 1:");
+        JLabel lblNum2 = new JLabel("Number 2:");
+        JLabel lblResult = new JLabel("Result:");
+
+        txtNum1 = new JTextField();
+        txtNum2 = new JTextField();
+        txtResult = new JTextField();
+        txtResult.setEditable(false);
+
+        btnDivide = new JButton("Divide");
+        btnDivide.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                performDivision();
+            }
+        });
+    }
+
+    private void addComponentsToFrame() {
+        add(new JLabel("Number 1:"));
+        add(txtNum1);
+        add(new JLabel("Number 2:"));
+        add(txtNum2);
+        add(new JLabel("Result:"));
+        add(txtResult);
+        add(new JLabel()); 
+        add(btnDivide);
+    }
+
+    private void performDivision() {
+        try {
+            int num1 = Integer.parseInt(txtNum1.getText());
+            int num2 = Integer.parseInt(txtNum2.getText());
+            int result = num1 / num2;
+            txtResult.setText(String.valueOf(result));
+
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter valid integers!", 
+                "Input Error", 
+                JOptionPane.ERROR_MESSAGE
+            );
+        } catch (ArithmeticException ae) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Cannot divide by zero!", 
+                "Arithmetic Error", 
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new IntDiv().setVisible(true);
+            }
+        });
+    }
+
+
+}

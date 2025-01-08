@@ -1,0 +1,34 @@
+import java.io.*;
+import java.util.Scanner;
+
+class Quad{
+	public static void main(String args[]){
+		double a,b,c,s1,s2;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("enter a b c of quadratic eqtn");
+		a = sc.nextDouble();
+		b = sc.nextDouble();
+		c = sc.nextDouble();
+		if(a==0){
+			System.out.print("INVALID EQTN");
+			return;
+		}
+		double d= b*b-4*a*c;
+		if (d>0){
+			System.out.println("real and distinct roots");
+			s1=(-b + Math.sqrt(d))/(2*a);
+			s2=(-b - Math.sqrt(d))/(2*a);
+			System.out.print("roots are "+s1+" "+s2);
+		}else if(d==0){
+			System.out.println("real and equal roots");
+			s1= -b/(2*a);
+			System.out.print("root: "+s1);
+		}else{
+			s1= -b/(2*a);
+			s2= Math.sqrt(-d)/(2*a);
+			System.out.println("imaginary roots");
+			System.out.println("root 1: "+s1+" +i "+s2);
+			System.out.println("root 1: "+s1+" -i "+s2);
+		}
+	}
+}
